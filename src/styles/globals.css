@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=BIZ+UDMincho:wght@400;700&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap")
+  @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: black;
+  font-family:
+    Shippori Mincho,
+    serif;
+  line-height: 1.1;
+  letter-spacing: 0em;
+}
