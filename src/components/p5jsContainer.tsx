@@ -8,7 +8,7 @@ if (typeof window !== "undefined") {
   Sketch = dynamic(importFunction, { ssr: false });
 }
 
-const selectedMetals: string[] = ["metal1", "metal2", "metal3"];
+// const selectedMetals: string[] = ["metal1", "metal2", "metal3"];
 
 const P5jsContainer: React.FC = (selectedMetals) => {
   return (

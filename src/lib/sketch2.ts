@@ -6,7 +6,21 @@ let noiseScale = 0.02;
 let drawDuration = 120; // 描画にかかるフレーム数
 let lifetime = 360; // 全体の寿命（フレーム数）
 let currentFrame = 0;
-let colors = [200, 120, 160, 130, 20, 150, 80, 80, 150];
+let test1 = 0;
+let test2 = 0;
+let test3 = 0;
+
+// Na (200, 200, 0);
+// Ca (244, 69, 0);
+// Ka (216, 109, 255);
+// Li (219, 0, 0);
+// Sr (216, 0, 79);
+// Ba (167, 232, 34);
+// Cu (0, 192, 151);
+let metalcolors = [200, 200, 0, 244, 69, 0, 216, 109, 255, 219, 0, 0, 216, 0, 79, 167, 232, 34, 0, 192, 151];
+let colors = [2, 1, 6]; //// Na (200, 200, 0); // Ca (244, 69, 0); // Li (219, 0, 0);
+
+
 let cx = 520;
 let cy = 450;
 
@@ -29,7 +43,7 @@ const setup = (p5: p5Types, canvasParentRef: Element) => {
     p5.noStroke();
     let maxRadius = p5.min(p5.width, p5.height) * 0.45;
     
-    firework = new Firework(p5, p5.width / 2, p5.height, cx, cy, colors);
+    firework = new Firework(p5, p5.width / 2, 1080, cx, cy, colors);
     startTime = p5.millis();
 }
 
@@ -69,9 +83,35 @@ class Firework {
           let angle = (j / (this.numLights + i*3))*p5.TAU + p5.random(-p5.TAU/60-p5.TAU/60);
           let pos = p5.createVector(this.center.x + p5.cos(angle) * radius, this.center.y + p5.sin(angle) * radius);
 
-          let r = colors[(p5.int((i/4)%3)*3 + 0)];
-          let g = colors[(p5.int((i/4)%3)*3 + 1)];
-          let b = colors[(p5.int((i/4)%3)*3 + 2)];
+          let r = 0;
+          let g = 0;
+          let b = 0;
+
+          if (i > 9) {
+            r = metalcolors[3 * colors[2]];
+            g = metalcolors[3 * colors[2] + 1];
+            b = metalcolors[3 * colors[2] + 2];
+            if (test1 == 0){
+              console.log("outer", r,g,b);
+              test1 = 1;
+            }
+          } else if (i > 4) {
+            r = metalcolors[3 * colors[1]];
+            g = metalcolors[3 * colors[1] + 1];
+            b = metalcolors[3 * colors[1] + 2];
+            if (test2 == 0){
+              console.log("middle", r,g,b);
+              test2 = 1;
+            }
+          } else if (i > 0) {
+            r = metalcolors[3 * colors[0]];
+            g = metalcolors[3 * colors[0] + 1];
+            b = metalcolors[3 * colors[0] + 2];
+            if (test3 == 0){
+              console.log("inner", r,g,b);
+              test3 = 1;
+            }
+          }
           
           console.log(p5.int((i/4)%3));
           
@@ -128,7 +168,7 @@ class Firework {
   
   displayGlowingLight(): void {
     for (let particle of this.particles) {
-        drawGlowingLight(this.p5, particle.pos.x, particle.pos.y, particle.r+this.p5.random(-90, 90), particle.g+this.p5.random(-10, 10), particle.b+ this.p5.random(-10, 10), particle.size);
+        drawGlowingLight(this.p5, particle.pos.x, particle.pos.y, particle.r+this.p5.random(-90, 90), particle.g+this.p5.random(-90, 90), particle.b+ this.p5.random(-90, 90), particle.size);
     }
   }
 }
@@ -188,7 +228,7 @@ const drawGlowingLight = (p5: p5Types, x: number, y: number, r: number, g: numbe
     for (let i = 4; i > 0; i--) {
         let alpha = p5.map(i, 6, 0, 40, 0);
         let size = p5.map(i, 4, 0, maxSize * 0.2, 5);
-        p5.fill(r, g, b, alpha);
+        p5.fill(r, g, b, 50);
         p5.ellipse(x, y, size);
     }
     p5.blendMode(p5.BLEND);
