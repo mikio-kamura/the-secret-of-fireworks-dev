@@ -1,7 +1,7 @@
 import React, { useRef, useContext, useState, useCallback } from "react";
 import Image from "next/image";
 import { ScrollContext } from "@/utils/scroll-observer";
-import { P5jsContainer } from "@/components/p5jsContainer";
+import P5jsContainer from "@/components/p5jsContainer";
 
 const Masthead: React.FC = () => {
   const [imageLoaded, setImageLoaded] = useState(false);

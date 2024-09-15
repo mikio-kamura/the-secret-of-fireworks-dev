@@ -8,7 +8,6 @@ import TrustedBy from "@/components/trustedby";
 import ContactUs from "@/components/contactus";
 import Footer from "@/components/footer";
 import useSWR from "swr";
-import { P5jsContainer } from "@/components/p5jsContainer";
 
 const fetcher = (input: any, init?: any) =>
   fetch(input, init).then((res) => res.json());
